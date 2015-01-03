@@ -1,0 +1,7 @@
+tags(tags, after = '')
+	result = join(after+',', tags-search(tags))+after
+	if block
+		{result}
+			{block}
+	else
+		return result

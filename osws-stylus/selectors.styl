@@ -1,0 +1,7 @@
+// file: string, [dir: string = '.'], [name: string = file], [weight: string = 'normal'], [style: string = 'normal']
+font-face(file, dir='.', name=file, weight='normal', style='normal')
+	@font-face
+		font-family: file
+		src: local(name), url(dir unquote('/') file unquote('.eot')) ,url(dir unquote('/') file unquote('.eot') '?#iefix') format('embedded-opentype'), url(dir unquote('/') file unquote('.woff')) format('woff'), url(dir unquote('/') file unquote('.ttf')) format('truetype'), url(dir unquote('/') file unquote('.svg') unquote('#') file) format('svg');
+		font-weight: unquote(weight)
+		font-style: unquote(style)
