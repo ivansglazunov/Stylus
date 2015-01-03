@@ -25,10 +25,84 @@ osws-options--generate(option, args, only = null, ignore = null, vendor = true)
 // × new options
 
 
+// indents
+
+// margin
+
+// value - `value is a 'unit' or value is auto`
+// center - `center`
+// direction - `direction in (top right bottom left h hor horizontal v ver vertical)`
+
+// available only to determine the `direction`:
+// `^[inherit]{1}` specified  `margin inherit`
+// `[value]{1,4}` specified default `margin`
+// `[direction]` define that will relate the following values
+// available only after determine the `direction`:
+// `[value]{1}` sets `margin-{direction}`
+// always available
+// `[center]` sets `margin-left auto` `margin-right auto`
+
+margin()
+	margins = null
+	directions = {}
+	for argument, a in arguments
+		if argument is a 'unit' or argument is auto
+			if arguments[a - 1] in (top right bottom left)
+				directions['' + arguments[a - 1]] = argument
+			else if length(margins) < 5
+				push(margins, argument)
+		else if argument is inherit
+			if arguments[a - 1] in (top right bottom left)
+				directions['' + arguments[a - 1]] = argument
+			else
+				margins = inherit
+		else if argument is center
+			directions.left = auto
+			directions.right = auto
+	if margins is not null
+		margin margins
+	for key, value in directions
+		margin-{key}: value;
+
+// padding
+
+// value - `value is a 'unit' or value is auto`
+// direction - `direction in (top right bottom left h hor horizontal v ver vertical)`
+
+// available only to determine the `direction`:
+// `^[inherit]{1}` specified  `padding inherit`
+// `[value]{1,4}` specified default `padding`
+// `[direction]` define that will relate the following values
+// available only after determine the `direction`:
+// `[value]{1}` sets `padding-{direction}`
+
+padding()
+	paddings = null
+	directions = {}
+	for argument, a in arguments
+		if argument is a 'unit' or argument is auto
+			if arguments[a - 1] in (top right bottom left)
+				directions['' + arguments[a - 1]] = argument
+			else if length(paddings) < 5
+				push(paddings, argument)
+		else if argument is inherit
+			if arguments[a - 1] in (top right bottom left)
+				directions['' + arguments[a - 1]] = argument
+			else
+				paddings = inherit
+	if paddings is not null
+		padding paddings
+	for key, value in directions
+		padding-{key}: value;
+
 // position
 
-// position +
-// ^[(z-index) unit/inherit]{1} [(position) static/absolute/fixed/relative/inherit]{1} [(direction) top/right/bottom/left unit]{1,4}
+// position
+
+// ^[(z-index) unit]{1}
+// [(position) static/absolute/fixed/relative/inherit]{1}
+// [(direction) top/right/bottom/left unit]{1,4}
+
 position()
 	result = {}
 	key = null
@@ -55,7 +129,10 @@ position()
 		{key}: value;
 
 // static/absolute/fixed/relative
-// ^[(z-index) unit]{1} [(direction) top/right/bottom/left unit]{1,4}
+
+// ^[(z-index) unit]{1}
+// [(direction) top/right/bottom/left unit]{1,4}
+
 static()
 	push(arguments, static)
 	position arguments
@@ -158,7 +235,26 @@ background-image()
 // border
 
 // border
-// [[top/right/bottom/left] ^[inherit] [[width] [unit/medium/xx-small/x-small/small/large/x-large/xx-large/smaller/larger/length/initial/inherit]{1,4}] [[style] [dotted/dashed/solid/double/groove/ridge/inset/outset/inherit]{1,4}] [[color] [rgba/inherit]{1,4}]]
+
+// widths - `width is a 'unit'`
+// styles - `styles in (dotted dashed solid double groove ridge inset outset)`
+// colors - `colors is a 'rgba'`
+// radius - `radius is a 'unit'`
+// direction - `directions in (top right bottom left)`
+
+// available only to determine the `direction`:
+// `[widths]{1,4}` sets `border-width`
+// `[styles]{1,4}` sets `border-style`
+// `[colors]{1,4}` sets `border-color`
+// `[radius]{1,4}` sets `border-radius`
+// `[direction]` define that will relate the following values: `widths` `styles` `colors`
+// available only after determine the `direction`:
+// `[widths]{1}` sets `border-{direction}-width`
+// `[styles]{1}` sets `border-{direction}-style`
+// `[colors]{1}` sets `border-{direction}-color`
+// sets inherit according to the context:
+// `[inherit]{1}` `[top/right/bottom/left inherit]{1}` `[width/styles/colors inherit]{1}`
+
 border()
 	widths = null
 	styles = null
