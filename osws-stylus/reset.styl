@@ -1,0 +1,167 @@
+reset-borders()
+	outline none
+	border-color transparent
+	border-width 0
+	border-collapse 0
+	border-spacing 0
+
+reset-colors()
+	background: transparent
+	color inherit
+
+reset-fonts()
+	font inherit
+	text-decoration inherit
+	font-style inherit
+	text-transform none
+	line-height inherit
+
+reset-indents()
+	margin 0
+	padding 0
+
+reset-clear()
+	reset-borders()
+	reset-colors()
+	reset-fonts()
+	reset-indents()
+
+reset()
+	*
+		reset-colors()
+		reset-indents()
+		reset-borders()
+		reset-fonts()
+		box-sizing border-box
+
+	{tags('baseline')}
+		vertical-align baseline
+
+	{tags('bold')}
+		font-weight bold
+
+	{tags('button', 'html4')}
+		cursor pointer
+		&::-moz-focus-inner
+			border 1px solid transparent
+
+	{tags('del')}
+		text-decoration line-through
+
+	details
+		appearance none
+		summary
+			appearance none
+			cursor pointer
+			&::-webkit-details-marker
+				display none
+		&:not([open]) >
+			display none
+		&[open] >
+			display block
+
+	dfn
+		font-style normal
+		&:nth-of-type(1)
+			font-style italic
+
+	*:disabled
+		cursor not-allowed
+
+	{tags('document')}
+		text-size-adjust 100%
+		line-height 1
+		background white
+		color black
+		reset-indents()
+
+	body
+		overflow-x hidden
+		overflow-y scroll
+		
+	h1
+		font-size 2em
+
+	h2
+		font-size 1.5em
+
+	h3
+		font-size 1.17em
+
+	h4
+		font-size 1em
+
+	h5
+		font-size .83em
+
+	h6
+		font-size .75em
+
+	{tags('hidden')}
+		display none
+
+	hr
+		height 1px
+		backbround-color black
+
+	{tags('input')}
+		cursor text
+		width 100%
+		color inherit
+		resize none
+		+placeholder()
+			opacity 1 !important
+			color inherit
+
+	{tags('italic')}
+		font-size italic
+
+	ul, ol
+		list-style-position inside
+
+	ul
+		list-style none
+		padding-left 0
+
+	li > ul
+		padding left 2em
+
+	ol
+		padding-left 2em
+
+	pre
+		overflow auto
+
+	select
+		width 100%
+
+	{tags('mono')}
+		font-family monospace
+
+	small
+		font-size .75em
+
+	big
+		font-size 1.25em
+
+	sub, sup
+		position relative
+		z-index 0
+		font-size .75em
+		line-height 0
+
+	sub
+		bottom -.5em
+
+	sup
+		top -.1.25em
+
+	{tags('variants')}
+		display none
+		& + label
+			display block
+			cursor pointer
+		& + label::before
+			content '-'
+		&:checked + label::before
+			content '+'

@@ -15,5 +15,9 @@
 	"repository" : {
 		"type" : "git",
 		"url" : "https://github.com/OSWS/OSWS-Stylus"
+	},
+	"dependencies": {
+		"lodash": "^2.4.1",
+	    "string": "^3.0.0"
 	}
 }

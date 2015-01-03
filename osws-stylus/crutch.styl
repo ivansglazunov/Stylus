@@ -1,0 +1,24 @@
+crutch-ellipsis(no-wrap = true)
+	if no-wrap
+		white-space: nowrap
+	overflow: hidden
+	text-overflow: unquote('ellipsis')
+
+crutch-float-center-container()
+	float left
+	position relative 0 left 50%
+
+crutch-float-center-item()
+	float left
+	position relative 0 right 50%	
+
+crutch-float-center()
+	crutch-float-center-container()
+	> *
+		crutch-float-center-item()
+
+crutch-table-middle()
+	display table;
+	> *
+		display table-cell
+		vertical-align middle

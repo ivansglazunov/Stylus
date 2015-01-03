@@ -1,0 +1,11 @@
+fix-float()
+	&:before
+	&:after
+		content: ""
+		display: table
+	&:after
+		clear: both
+		zoom: 1
+
+fix-float-container()
+	overflow hidden

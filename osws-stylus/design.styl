@@ -1,0 +1,17 @@
+border-triangle(direction, size=10px, color=#000)
+	if direction is top or direction is 'top' or direction is 'up' or direction is '^'
+		border-left: size solid transparent
+		border-right: size solid transparent
+		border-bottom: size solid color
+	else if direction is bottom or direction is 'bottom' or direction is 'down' or direction is 'v'
+		border-left: size solid transparent
+		border-right: size solid transparent
+		border-top: size solid color
+	else if direction is left or direction is 'left' or direction is '<'
+		border-top: size solid transparent
+		border-bottom: size solid transparent
+		border-right: size solid color
+	else if direction is right or direction is 'right' or direction is '>'
+		border-top: size solid transparent
+		border-bottom: size solid transparent
+		border-left: size solid color
