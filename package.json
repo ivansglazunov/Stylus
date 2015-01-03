@@ -1,0 +1,19 @@
+{
+	"name": "osws-stylus",
+	"version": "0.1.0",
+	"description": "Complete tools in one place.",
+	"keywords": [],
+	"author": "Open Source Web Standards",
+	"homepage": "http://osws.github.io/OSWS-Stylus",
+	"bugs" : {
+		"url" : "https://github.com/OSWS/OSWS-Stylus/issues",
+		"email" : "opensourcewebstandards@gmail.com"
+	},
+	"license": "MIT",
+	"author": "Open Source Web Standards <opensourcewebstandards@gmail.com> (http://osws.github.io/OSWS)",
+	"main": "osws-stylus.js",
+	"repository" : {
+		"type" : "git",
+		"url" : "https://github.com/OSWS/OSWS-Stylus"
+	}
+}
