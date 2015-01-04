@@ -1,0 +1,78 @@
+osws-options--prefixes ?= webkit moz o ms official khtml
+
+// options cross-browser generator
+osws-options--generate(option, args, only = null, ignore = null, vendor = true)
+	needNormalize = !vendor or option in ('transition' 'transition-property' 'border-image' 'border-image-slice')
+	for prefix in osws-options--prefixes
+		unless (only and !(prefix in only)) or (ignore and prefix in ignore)
+			if official == prefix
+				if needNormalize
+					{option}: osws-options-generate--normalize(option,('%s' % args))
+				else
+					{option}: args
+			else
+				newprop = option
+				newprop = '-' + prefix + '-' + option if vendor
+
+				if needNormalize
+					{newprop}: osws-options-generate--normalize(option,('%s' % args),prefix)
+				else
+					{newprop}: args
+
+
+@import 'indents.styl'
+@import 'position.styl'
+@import 'background.styl'
+@import 'border.styl'
+@import 'box.styl'
+@import 'text.styl'
+@import 'perspective.styl'
+@import 'transform.styl'
+@import 'transition.styl'
+@import 'column.styl'
+@import 'animation.styl'
+
+// cursor
+cursor()
+	if match('-gradient\(', ''+arguments)
+		osws-options--generate('cursor', arguments, vendor: false)
+	else
+		cursor arguments
+
+// opacity
+// http://css-tricks.com/snippets/css/cross-browser-opacity/
+opacity(argument)
+	if argument in (inherit initial)
+		-ms-filter argument
+		filter argument
+	else if argument is a 'unit'
+		num = round(argument * 100)
+		if num == 100
+			-ms-filter none
+			filter none
+		else
+			-ms-filter '"progid:DXImageTransform.Microsoft.Alpha(Opacity=%s)"' % num
+			filter 'alpha(opacity=%s)' % num
+	
+	osws-options--generate('opacity', argument, only: official moz khtml)
+
+// user-select
+// http://css-tricks.com/almanac/properties/u/user-select/
+user-select()
+	osws-options--generate('user-select', arguments, ignore: khtml)
+
+// backface-visibility
+backface-visibility()
+	osws-options--generate('backface-visibility', arguments, only: webkit moz ms official)
+
+// hyphens
+hyphens()
+	osws-options--generate('hyphens', arguments, only: webkit moz ms official)
+
+// appearance
+appearance()
+	osws-options--generate('appearance', arguments, only: webkit moz official)
+
+// overflow-scrolling
+overflow-scrolling()
+	osws-options--generate('overflow-scrolling', arguments, only: webkit official)

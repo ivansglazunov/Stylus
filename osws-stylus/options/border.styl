@@ -1,0 +1,78 @@
+// border
+
+// widths - `width is a 'unit'`
+// styles - `styles in (dotted dashed solid double groove ridge inset outset)`
+// colors - `colors is a 'rgba'`
+// radius - `radius is a 'unit'`
+// direction - `directions in (top right bottom left)`
+
+// available only to determine the `direction`:
+// `[widths]{1,4}` sets `border-width`
+// `[styles]{1,4}` sets `border-style`
+// `[colors]{1,4}` sets `border-color`
+// `[radius]{1,4}` sets `border-radius`
+// `[direction]` define that will relate the following values: `widths` `styles` `colors`
+// available only after determine the `direction`:
+// `[widths]{1}` sets `border-{direction}-width`
+// `[styles]{1}` sets `border-{direction}-style`
+// `[colors]{1}` sets `border-{direction}-color`
+// sets inherit according to the context:
+// `[inherit]{1}` `[top/right/bottom/left inherit]{1}` `[width/styles/colors inherit]{1}`
+
+border()
+	widths = null
+	styles = null
+	colors = null
+	radius = null
+	
+	direction = null
+	key = null
+
+	for argument, a in arguments
+		if argument in (top right bottom left)
+			unless direction
+				border-width: widths; if widths is not null
+				border-style: styles; if styles is not null
+				border-color: colors; if colors is not null
+			direction = argument
+			key = null
+		else if direction
+			if argument is a 'unit'
+				border-{direction}-width: argument;
+			if argument in (dotted dashed solid double groove ridge inset outset)
+				border-{direction}-style: argument;
+			if argument is a 'rgba'
+				border-{direction}-color: argument;
+			if argument is inherit
+				if arguments[a - 1] in (width style color)
+					border-{direction}-{arguments[a - 1]}: inherit;
+				else
+					border-{direction}: inherit;
+		else
+			if length(width) < 5 and argument is a 'unit'
+				push(widths, argument)
+			else if length(styles) < 5 and argument in (dotted dashed solid double groove ridge inset outset)
+				push(styles, argument)
+			else if length(colors) < 5 and argument is a 'rgba'
+				push(colors, argument)
+			else if argument is inherit
+				if arguments[a - 1] in (width style color)
+					border-{arguments[a - 1]}: inherit;
+				else
+					border: inherit;
+	
+	unless direction
+		border-width: widths; if widths is not null
+		border-style: styles; if styles is not null
+		border-color: colors; if colors is not null
+	
+	unless radius
+		border-radius: radius;
+
+// border-radius
+border-radius()
+	osws-options--generate('border-radius', arguments)
+
+// border-image
+border-image()
+	osws-options--generate('border-image', arguments, only: webkit moz ms o official)

@@ -1,0 +1,67 @@
+// margin
+
+// value - `value is a 'unit' or value is auto`
+// center - `center`
+// direction - `direction in (top right bottom left h hor horizontal v ver vertical)`
+
+// available only to determine the `direction`:
+// `^[inherit]{1}` specified  `margin inherit`
+// `[value]{1,4}` specified default `margin`
+// `[direction]` define that will relate the following values
+// available only after determine the `direction`:
+// `[value]{1}` sets `margin-{direction}`
+// always available
+// `[center]` sets `margin-left auto` `margin-right auto`
+
+margin()
+	margins = null
+	directions = {}
+	for argument, a in arguments
+		if argument is a 'unit' or argument is auto
+			if arguments[a - 1] in (top right bottom left)
+				directions['' + arguments[a - 1]] = argument
+			else if length(margins) < 5
+				push(margins, argument)
+		else if argument is inherit
+			if arguments[a - 1] in (top right bottom left)
+				directions['' + arguments[a - 1]] = argument
+			else
+				margins = inherit
+		else if argument is center
+			directions.left = auto
+			directions.right = auto
+	if margins is not null
+		margin margins
+	for key, value in directions
+		margin-{key}: value;
+
+// padding
+
+// value - `value is a 'unit' or value is auto`
+// direction - `direction in (top right bottom left h hor horizontal v ver vertical)`
+
+// available only to determine the `direction`:
+// `^[inherit]{1}` specified  `padding inherit`
+// `[value]{1,4}` specified default `padding`
+// `[direction]` define that will relate the following values
+// available only after determine the `direction`:
+// `[value]{1}` sets `padding-{direction}`
+
+padding()
+	paddings = null
+	directions = {}
+	for argument, a in arguments
+		if argument is a 'unit' or argument is auto
+			if arguments[a - 1] in (top right bottom left)
+				directions['' + arguments[a - 1]] = argument
+			else if length(paddings) < 5
+				push(paddings, argument)
+		else if argument is inherit
+			if arguments[a - 1] in (top right bottom left)
+				directions['' + arguments[a - 1]] = argument
+			else
+				paddings = inherit
+	if paddings is not null
+		padding paddings
+	for key, value in directions
+		padding-{key}: value;

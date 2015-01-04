@@ -1,0 +1,8 @@
+perspective()
+	if mixin
+		osws-options--generate('perspective', arguments, only: webkit moz ms official)
+	else
+		'perspective(%s)' % arguments
+
+perspective-origin()
+	osws-options--generate('perspective-origin', arguments, only: webkit moz ms official)

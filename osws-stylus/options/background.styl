@@ -1,0 +1,81 @@
+// options background css3 generator
+osws-options-background--generate(option, args)
+	_args = null
+	importance = unquote('')
+	for subargs in args
+		for arg in subargs
+			if arg in (border-box padding-box content-box)
+				arg = unquote('border') if arg == border-box
+				arg = unquote('padding') if arg == padding-box
+				arg = unquote('content') if arg == content-box
+			if arg != '!important'
+				push(_args,arg)
+			else
+				importance = !important
+	osws-options--generate(option, unquote(join(', ',_args)) importance, only: moz webkit)
+
+// background
+
+// directions in (top right bottom left)
+// repeats in (repeat no-repeat repeat-x repeat-y space round)
+
+// ^[inherit]
+// [[fixed/scroll]{1}/attachment inherit]
+// [[rgba/transparent]{1}/color inherit]
+// [[call(url())/linear-gradient()]{1}/image inherit]
+// [[directions/unit]{1,2}/position inherit]
+// [[repeats]{1}/repeat inherit]
+
+background()
+	if arguments[0] is inherit
+		background: inherit
+	else
+		-background-position = null
+		-background-image = null
+		key = null
+		result = {}
+		for argument, a in arguments
+			key = arguments[a - 1] if a > 0
+			if argument is inherit
+				if key and key in (attachment color image position repeat)
+					result[''+key] = argument
+			else if argument in (fixed scroll) // auto detect attachment
+				result['attachment'] = argument;
+			else if argument in (transparent) or argument is a 'rgba' // auto detect color
+				result['color'] = argument;
+			else if argument is a 'call' // auto detect image
+				-background-image = argument
+			else if argument in (top right bottom left) or argument is a 'unit' // auto detect position
+				if length(-background-position) < 3
+					push(-background-position, argument)
+			else if argument in (repeat no-repeat repeat-x repeat-y space round) // auto detect repeat
+				result['repeat'] = argument
+		for key, value in result
+			background-{key}: value;
+		if -background-position is not null
+			background-position: -background-position
+		if -background-image is not null
+			if match('-gradient\(', ''+-background-image)
+				osws-options--generate('background-image', -background-image, vendor: false)
+			else if match('url\(', ''+-background-image)
+				background-image: -background-image
+
+background-clip()
+	if arguments[0] == text
+		osws-options--generate('background-clip', arguments, only: webkit moz official)
+	else
+		osws-options-background--generate('background-clip', arguments)
+		background-clip: arguments
+
+background-origin()
+	osws-options-background--generate('background-origin', arguments, only: webkit moz official)
+	background-origin: arguments
+
+background-size()
+	osws-options--generate('background-size', arguments, only: webkit moz official)
+
+background-image()
+	if match('-gradient\(', ''+arguments)
+		osws-options--generate('background-image', arguments, vendor: false)
+	else
+		background-image arguments
