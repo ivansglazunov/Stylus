@@ -3,22 +3,22 @@ osws-grid-indent ?= 0
 osws-grid-indent ?= 0
 osws-grid-parent-first ?= false
 
-grid(_ratios = 1, _offset = 0, _inline = 0, _outline = 0, _indent = osws-grid-indent)
+grid(ratios = 1, offset = 0, row = 0, outrow = 0, indent = osws-grid-indent)
 	side = osws-grid-float
 	opposite-side = opposite-position(side)
-	column-widths = osws-grid-get-column(_ratios, _indent)
+	column-widths = osws-grid-get-column(ratios, indent)
 	margin-last = 0
 	margin-l = margin-last
 	margin-r = column-widths[1]
 	
-	unless _offset == 0
-		if _offset < 0
-			_offset *= -1
-			_offset = osws-grid-get-column(_offset, column-widths[1])[0]
-			margin-r = margin-last = _offset + column-widths[1] * 2
+	unless offset == 0
+		if offset < 0
+			offset *= -1
+			offset = osws-grid-get-column(offset, column-widths[1])[0]
+			margin-r = margin-last = offset + column-widths[1] * 2
 		else
-			_offset = osws-grid-get-column(_offset, column-widths[1])[0]
-			margin-l = _offset + column-widths[1]
+			offset = osws-grid-get-column(offset, column-widths[1])[0]
+			margin-l = offset + column-widths[1]
 
 	fix-float()
 	float: side
@@ -27,28 +27,28 @@ grid(_ratios = 1, _offset = 0, _inline = 0, _outline = 0, _indent = osws-grid-in
 	margin-{side}: (margin-l)%
 	margin-{opposite-side}: (margin-r)%
 
-	if _outline != 0
-		&:nth-of-type({_outline}n)
+	if outrow != 0
+		&:nth-of-type({outrow}n)
 			margin-{opposite-side}: (margin-r)%
 			float: side
-		&:nth-of-type({_outline}n+1)
+		&:nth-of-type({outrow}n+1)
 			clear: none
 
-	if _inline != 0
-		&:nth-of-type({_inline}n)
+	if row != 0
+		&:nth-of-type({row}n)
 			margin-{opposite-side}: (margin-last)%
 			float: opposite-side
-		&:nth-of-type({_inline}n+1)
+		&:nth-of-type({row}n+1)
 			clear: both
 	 else
 		&:last-child
 			margin-{opposite-side}: (margin-last)%
 
-osws-grid-get-column(_ratios = 1, indent = osws-grid-indent)
-	_ratios = reverse-list(_ratios) unless osws-grid-parent-first is true
+osws-grid-get-column(ratios = 1, indent = osws-grid-indent)
+	ratios = reverse-list(ratios) unless osws-grid-parent-first is true
 	width = 100
 
-	for ratio in _ratios
+	for ratio in ratios
 		indent = indent / width * 100
 		width = 100 * ratio - indent + ratio * indent
 
