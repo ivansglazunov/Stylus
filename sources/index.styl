@@ -1,0 +1,69 @@
+@import 'osws-stylus'
+reset()
+
+font-face(file: 'Ubuntu-Light', name: 'Ubuntu', dir: './fonts')
+
+light-gray = darken(white, 10%)
+black = contrast-color(white)
+
++tags('document')
+	font 'Ubuntu' black
+	size 100%
+
+.GitHub
+	display block
+	width 300px
+	padding .25em
+	transform rotate(-45deg)
+	fixed 10 left (-60px) top 80px
+	font center
+	background lighten(light-gray, 50%)
+	color contrast-color(light-gray)
+
+.Screen
+	size 100%
+	relative 0
+	
+	&.header
+		background white
+		crutch-table-middle()
+		font-size 3em
+		
+		> *
+			size 100%
+			
+			> *
+				margin v .5em
+			
+			> .path
+				fix-float-container()
+				
+				> *
+					magic-float center
+					
+					> *
+						display block
+						padding 5px h 10px
+						
+						&:first-child:not(:last-child)
+							background light-gray
+							color black
+							relative 0
+							padding right 0
+							margin right 30px
+							
+							&:after
+								absolute top 0 right (- 32px)
+								border-triangle right light-gray 16px
+			
+			> .description
+				font center 0.35em
+				opacity .75
+			
+			> .version
+				font center 0.5em
+				opacity .75
+	
+	&.about
+		background light-gray
+		color black
