@@ -78,6 +78,6 @@ module.exports = function(stylus) {
 			else tags.push(value.val);
 		});
 		if (tags.length == 0) throw new Error('tags can not be empty');
-		return plugin.search(memory, tags, ignore);
+		return search(memory, tags, ignore);
 	});
 };

@@ -5,3 +5,15 @@ font-face(file, dir='.', name=file, weight='normal', style='normal')
 		src: local(name), url(dir unquote('/') file unquote('.eot')) ,url(dir unquote('/') file unquote('.eot') '?#iefix') format('embedded-opentype'), url(dir unquote('/') file unquote('.woff')) format('woff'), url(dir unquote('/') file unquote('.ttf')) format('truetype'), url(dir unquote('/') file unquote('.svg') unquote('#') file) format('svg');
 		font-weight: unquote(weight)
 		font-style: unquote(style)
+
+osws-helpers-contrast--bg = white
+osws-helpers-contrast--light = 75%
+osws-helpers-contrast--dark = 75%
+osws-helpers-contrast--strength = 3
+
+// [bg: rgba = white], [light: % = 75%], [dark: % = 75%], [strength: number = 3]
+contrast-color(bg = osws-helpers-contrast--bg, light = lighten(bg, osws-helpers-contrast--light), dark = darken(bg, osws-helpers-contrast--dark), strength = osws-helpers-contrast--strength)
+	if strength < contrast(bg, dark).ratio
+		return dark
+	else
+		return light

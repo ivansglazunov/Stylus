@@ -1,5 +1,5 @@
-tags(tags)
-	result = join(after+',', tags-search(tags))+after
+tags()
+	result = join(',', tags-search(arguments[0]))
 	if block
 		{result}
 			{block}
