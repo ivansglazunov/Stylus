@@ -1,0 +1,19 @@
+// size
+
+// [unit/inherit]{1,2}
+
+size()
+	width = false
+	height = false
+	for argument in arguments
+		if argument is a 'unit' or argument is inherit
+			if width is false
+				width = argument
+			else if height is false
+				height = argument
+	if width is false
+		error('width must be passed')
+	if height is false
+		height = width
+	width width
+	height height
