@@ -1,3 +1,112 @@
+// font and text
+
+// [italic/oblique] as style
+// [small-caps] as variant
+// [bold/bolder/lighter] as weight
+// [unit] as size
+// [xx-small/x-small/small/medium/large/x-large/xx-large/larger] as size
+// [serif/sans-serif/cursive/fantasy/monospace/string] as family
+
+// [style [normal/italic/oblique/inherit]{1}]
+// [variant [normal/small-caps/inherit]{1}]
+// [weight [bold/bolder/lighter/normal/100/200/300/400/500/600/700/800/900/inherit/unit]{1}]
+// [size [xx-small/x-small/small/medium/large/x-large/xx-large/larger/smaller/unit]{1}]
+// [family [serif/sans-serif/cursive/fantasy/monospace/inherit/string]]
+
+// [center/justify/left/right/start/end/auto] for text-align center
+// [align [center/justify/left/right/start/end/auto/inherit]]
+
+// [decoration [blink/line-through/overline/underline/none/inherit]]
+// [blink/line-through/overline/underline] as decoration
+
+// [indent [unit/inherit]]
+
+// [overflow [clip/ellipsis/none/inherit]]
+// [clip/ellipsis] as overflow
+
+// [transform [capitalize/lowercase/uppercase/none/inherit]]
+// [capitalize/lowercase/uppercase] as transform
+
+// [color [rgba]]
+// [rgba] as color
+
+osws-options-texts--unit-priority ?= 'size'
+
+osws-options-texts(arguments)
+	result = {}
+	key null
+	for argument, a in arguments
+		if argument in (style variant weight size family)
+			key = argument
+		else if key is style and argument in (normal italic oblique inherit)
+			result['font-style'] = argument
+		else if key is variant and argument in (normal small-caps inherit)
+			result['font-variant'] = argument
+		else if key is weight and argument in (bold bolder lighter normal 100 200 300 400 500 600 700 800 900 inherit) or argument is a 'unit'
+			result['font-weight'] = argument
+		else if key is size and argument in (xx-small x-small small medium large x-large xx-large larger smaller) or argument is a 'unit'
+			result['font-size'] = argument
+		else if key is family and argument in (serif sans-serif cursive fantasy monospace inherit) or argument is a 'string'
+			push(result['font-family'], argument)
+		else if key is align and argument in (center justify left right start end auto inherit)
+			result['text-align'] = argument
+		else if key is decoration and argument in (blink line-through overline underline none inherit)
+			result['text-decoration'] = argument
+		else if key is indent and argument is inherit or argument is a 'unit'
+			result['text-indent'] = argument
+		else if key is overflow and argument in (clip ellipsis none inherit)
+			result['text-overflow'] = argument
+		else if key is transform and argument in (capitalize lowercase uppercase none inherit)
+			result['text-transform'] = argument
+		else if key is color and argument is a 'rgba'
+			result['color'] = argument
+		
+		else if argument is a 'unit'
+			result[osws-options-font--unit-priority] = argument
+			key = null
+		else if argument in (italic oblique)
+			result['font-style'] = argument
+			key = null
+		else if argument in (small-caps)
+			result['font-variant'] = argument
+			key = null
+		else if argument in (bold bolder lighter)
+			result['font-weight'] = argument
+			key = null
+		else if argument in (xx-small x-small small medium large x-large xx-large larger)
+			result['font-size'] = argument
+			key = null
+		else if argument in (serif sans-serif cursive fantasy monospace) or argument is a 'string'
+			result['font-family'] = argument
+			key = null
+		else if argument in (center justify left right start end auto)
+			result['text-align'] = argument
+			key = null
+		else if argument in (blink line-through overline underline)
+			result['text-decoration'] = argument
+			key = null
+		else if argument in (clip ellipsis)
+			result['text-overflow'] = argument
+			key = null
+		else if argument in (capitalize lowercase uppercase)
+			result['text-transform'] = argument
+			key = null
+		else if argument is a 'rgba'
+			result['color'] = argument
+			key = null
+		
+	return result
+
+font()
+	result = osws-options-texts(arguments)
+	for key, value in result
+		{key}: value;
+
+text()
+	result = osws-options-texts(arguments)
+	for key, value in result
+		{key}: value;
+
 text-overflow()
 	osws-options--generate('text-overflow', arguments, only: official o)
 text-size-adjust()

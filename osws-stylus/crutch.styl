@@ -4,21 +4,27 @@ crutch-ellipsis(no-wrap = true)
 	overflow: hidden
 	text-overflow: unquote('ellipsis')
 
+// used in crutch-float-center
+// apply to container
 crutch-float-center-container()
 	float left
 	position relative 0 left 50%
 
+// used in crutch-float-center
+// apply to item
 crutch-float-center-item()
 	float left
 	position relative 0 right 50%	
 
+// apply to container
 crutch-float-center()
 	crutch-float-center-container()
 	> *
 		crutch-float-center-item()
 
+// apply to container of container
 crutch-table-middle()
-	display table;
+	display table
 	> *
 		display table-cell
 		vertical-align middle

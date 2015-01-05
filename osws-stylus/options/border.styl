@@ -49,11 +49,11 @@ border()
 				else
 					border-{direction}: inherit;
 		else
-			if length(width) < 5 and argument is a 'unit'
+			if argument is a 'unit'
 				push(widths, argument)
-			else if length(styles) < 5 and argument in (dotted dashed solid double groove ridge inset outset)
+			else if argument in (dotted dashed solid double groove ridge inset outset)
 				push(styles, argument)
-			else if length(colors) < 5 and argument is a 'rgba'
+			else if argument is a 'rgba'
 				push(colors, argument)
 			else if argument is inherit
 				if arguments[a - 1] in (width style color)

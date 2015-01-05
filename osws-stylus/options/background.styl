@@ -46,8 +46,7 @@ background()
 			else if argument is a 'call' // auto detect image
 				-background-image = argument
 			else if argument in (top right bottom left) or argument is a 'unit' // auto detect position
-				if length(-background-position) < 3
-					push(-background-position, argument)
+				push(-background-position, argument)
 			else if argument in (repeat no-repeat repeat-x repeat-y space round) // auto detect repeat
 				result['repeat'] = argument
 		for key, value in result
