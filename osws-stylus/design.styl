@@ -1,17 +1,45 @@
-border-triangle(direction, size=10px, color=#000)
-	if direction is top or direction is 'top' or direction is 'up' or direction is '^'
-		border-left: size solid transparent
-		border-right: size solid transparent
-		border-bottom: size solid color
-	else if direction is bottom or direction is 'bottom' or direction is 'down' or direction is 'v'
-		border-left: size solid transparent
-		border-right: size solid transparent
-		border-top: size solid color
-	else if direction is left or direction is 'left' or direction is '<'
-		border-top: size solid transparent
-		border-bottom: size solid transparent
-		border-right: size solid color
-	else if direction is right or direction is 'right' or direction is '>'
-		border-top: size solid transparent
-		border-bottom: size solid transparent
-		border-left: size solid color
+border-triangle()
+	border-style solid
+	width = size
+	width = (size * 2) if length(direction) is 2
+	size = 10px
+	color = #000
+	direction = null
+	
+	for argument in arguments
+		if argument is a 'unit'
+			size = argument
+		else if argument is a 'rgba'
+			color = argument
+		else if argument in (top right bottom left) and direction < 3
+			push(direction, argument)
+	
+	unless direction
+		direction = top
+
+	if direction is top
+		border-width 0 width width width
+		border-color transparent transparent color transparent
+	else if direction is bottom
+		border-width width width 0 width
+		border-color color transparent transparent transparent
+	else if direction is left
+		border-width width width width 0
+		border-color transparent color transparent transparent
+	else if direction is right
+		border-width width 0 width width
+		border-color transparent transparent transparent color
+	else if top in direction and right in direction
+		border-width 0 width width 0
+		border-color transparent color transparent transparent
+	else if top in direction and left in direction
+		border-width width width 0 0
+		border-color color transparent transparent transparent
+	else if bottom in direction and right in direction
+		border-width 0 0 width width
+		border-color transparent transparent color transparent
+	else if bottom in direction and left in direction
+		border-width width 0 0 width
+		border-color transparent transparent transparent color
+	else
+		error('unexpected direction')
