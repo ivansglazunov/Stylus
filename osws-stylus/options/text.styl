@@ -36,11 +36,11 @@
 // [color [rgba]]
 // [rgba] as color
 
-osws-options-texts--unit-priority ?= 'size'
+osws-options-texts--unit-priority ?= 'font-size'
 
 osws-options-texts(arguments)
 	result = {}
-	key null
+	key = null
 	for argument, a in arguments
 		if argument in (style variant weight size family)
 			key = argument
@@ -68,7 +68,7 @@ osws-options-texts(arguments)
 			result['color'] = argument
 		
 		else if argument is a 'unit'
-			result[osws-options-font--unit-priority] = argument
+			result[osws-options-texts--unit-priority] = argument
 			key = null
 		else if argument in (italic oblique)
 			result['font-style'] = argument

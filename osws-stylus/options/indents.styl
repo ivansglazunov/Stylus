@@ -14,7 +14,7 @@
 // `[center]` sets `margin-left auto` `margin-right auto`
 
 margin()
-	margins = null
+	margins = ()
 	directions = {}
 	for argument, a in arguments
 		if argument is a 'unit' or argument is auto
@@ -30,7 +30,7 @@ margin()
 		else if argument is center
 			directions.left = auto
 			directions.right = auto
-	if margins is not null
+	if length(margins) > 0
 		margin margins
 	for key, value in directions
 		margin-{key}: value;
@@ -48,7 +48,7 @@ margin()
 // `[value]{1}` sets `padding-{direction}`
 
 padding()
-	paddings = null
+	paddings = ()
 	directions = {}
 	for argument, a in arguments
 		if argument is a 'unit' or argument is auto
@@ -61,7 +61,7 @@ padding()
 				directions['' + arguments[a - 1]] = argument
 			else
 				paddings = inherit
-	if paddings is not null
+	if length(paddings) > 0
 		padding paddings
 	for key, value in directions
 		padding-{key}: value;

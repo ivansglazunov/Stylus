@@ -1,6 +1,6 @@
 // options background css3 generator
 osws-options-background--generate(option, args)
-	_args = null
+	_args = ()
 	importance = unquote('')
 	for subargs in args
 		for arg in subargs
@@ -30,7 +30,7 @@ background()
 	if arguments[0] is inherit
 		background: inherit
 	else
-		-background-position = null
+		-background-position = ()
 		-background-image = null
 		key = null
 		result = {}
@@ -51,7 +51,7 @@ background()
 				result['repeat'] = argument
 		for key, value in result
 			background-{key}: value;
-		if -background-position is not null
+		if length(-background-position) > 0
 			background-position: -background-position
 		if -background-image is not null
 			if match('-gradient\(', ''+-background-image)

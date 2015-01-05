@@ -1,7 +1,7 @@
 osws-options--prefixes ?= webkit moz o ms official khtml
 
 // options cross-browser generator
-osws-options--generate(option, args, only = null, ignore = null, vendor = true)
+osws-options--generate(option, args, only = (), ignore = (), vendor = true)
 	needNormalize = !vendor or option in ('transition' 'transition-property' 'border-image' 'border-image-slice')
 	for prefix in osws-options--prefixes
 		unless (only and !(prefix in only)) or (ignore and prefix in ignore)

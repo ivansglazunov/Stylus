@@ -12,7 +12,7 @@ border-triangle()
 	border-style solid
 	size = 10px
 	color = #000
-	direction = null
+	direction = ()
 	content = ''
 	
 	for argument in arguments
@@ -20,18 +20,12 @@ border-triangle()
 			size = argument
 		else if argument is a 'rgba'
 			color = argument
-		else if argument in (top right bottom left) and length(direction) < 4
+		else if argument in (top right bottom left) and length(direction) < 3
 			push(direction, argument)
 		else if argument is false or argument is a 'string'
 			content = argument
-	
 	width = size
-	width = (size * 2) if length(direction) is 2
-	
-	if length(direction) is 2
-		direction = direction[1]
-	else if length(direction) is 3
-		direction = direction[1] direction[2]
+	width = (size * 2) if length(direction) is 1
 
 	if direction is top
 		border-width: 0 width width width
@@ -58,7 +52,7 @@ border-triangle()
 		border-width: width 0 0 width
 		border-color: transparent transparent transparent color
 	else
-		error('unexpected direction')
+		error('unexpected direction: ' + direction)
 	
 	if content is a 'string'
 		if match(':after', selector()) or match(':before', selector())

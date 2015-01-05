@@ -20,10 +20,9 @@
 // `[inherit]{1}` `[top/right/bottom/left inherit]{1}` `[width/styles/colors inherit]{1}`
 
 border()
-	widths = null
-	styles = null
-	colors = null
-	radius = null
+	widths = ()
+	styles = ()
+	colors = ()
 	
 	direction = null
 	key = null
@@ -31,9 +30,12 @@ border()
 	for argument, a in arguments
 		if argument in (top right bottom left)
 			unless direction
-				border-width: widths; if widths is not null
-				border-style: styles; if styles is not null
-				border-color: colors; if colors is not null
+				border-width: widths; if length(width) < 0
+				if length(styles) < 0
+					border-style: styles;
+				else
+					border-style: solid;
+				border-color: colors; if length(colors) < 0
 			direction = argument
 			key = null
 		else if direction
@@ -62,12 +64,12 @@ border()
 					border: inherit;
 	
 	unless direction
-		border-width: widths; if widths is not null
-		border-style: styles; if styles is not null
-		border-color: colors; if colors is not null
-	
-	unless radius
-		border-radius: radius;
+		border-width: widths; if length(width) < 0
+		if length(styles) < 0
+			border-style: styles;
+		else
+			border-style: solid;
+		border-color: colors; if length(colors) < 0
 
 // border-radius
 border-radius()
