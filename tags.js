@@ -17,7 +17,7 @@ memory["text"] = {"h1": true, "h2": true, "h3": true, "h4": true, "h5": true, "h
 memory["baseline"] = {"object": true, "sub": true, "sup": true, "audio": true, "video": true, "embed": true, "canvas": true};
 memory["button"] = {"a": true, "button": true, "input[type=button]": true, "input[type=reset]": true, "input[type=submit]": true, "input[type=image]": true, "input[type=file]": true, "input[type=color]": true};
 memory["input"] = {"input[type=text]": true, "input[type=password]": true, "textarea": true, "input[type=email]": true, "input[type=number]": true, "input[type=date]": true, "input[type=datetime]": true, "input[type=datetime-local]": true,"input[type=search]": true, "input[type=tel]": true, "input[type=time]": true, "input[type=url]": true, "input[type=month]": true, "input[type=week]": true};
-memory["variants"] = {"input[type=checkbox]": true, "input[type=radio]": true};
+memory["switcher"] = {"input[type=checkbox]": true, "input[type=radio]": true};
 memory["select"] = {"select": true, "option": true};
 memory["bold"] = {"h1": true, "h2": true, "h3": true, "h4": true, "h5": true, "h6": true, "dt": true, "b": true, "strong": true};
 memory["italic"] = {"address": true, "i": true, "var": true, "cite": true, "em": true, "q": true};
