@@ -1,19 +1,34 @@
 // size
 
-// [unit/inherit]{1,2}
+// ^[unit/auto/inherit]{1,2} as width and height ?= width
+// [max/min unit/inherit/auto/[width/height unit/inherit/auto]]
+// [width/height unit/inherit/auto/[max/min unit/inherit/auto]]
 
 size()
-	width = false
-	height = false
-	for argument in arguments
-		if argument is a 'unit' or argument is inherit
-			if width is false
-				width = argument
-			else if height is false
-				height = argument
-	if width is false
-		error('width must be passed')
-	if height is false
-		height = width
-	width width
-	height height
+	result = {}
+	axis = null
+	limit = null
+	for argument, a in arguments
+		if argument in (width height)
+			axis = argument
+		else if argument is max
+			limit = 'max'
+		else if argument is min
+			limit = 'min'
+		else if argument is a 'unit' or argument in (auto inherit)
+			if axis is null and limit is null
+				if result.width is null
+					result.width = argument
+				else if result.height is null
+					result.height = argument
+			else if axis is not null and limit is null
+				result[axis] = argument
+			else if axis is null and limit is not null
+				result[limit + '-width'] = argument
+				result[limit + '-height'] = argument
+			else if axis is not null and limit is not null
+				result[limit + '-' + axis] = argument
+	unless result.height
+		result.height = result.width
+	for key, value in result
+		{key}: value;
