@@ -3,6 +3,7 @@
 // ^[unit/auto/inherit]{1,2} as width and height ?= width
 // [max/min unit/inherit/auto/[width/height unit/inherit/auto]]
 // [width/height unit/inherit/auto/[max/min unit/inherit/auto]]
+// [content-box/border-box/padding-box] as box-sizing
 
 size()
 	result = {}
@@ -28,6 +29,8 @@ size()
 				result[limit + '-height'] = argument
 			else if axis is not null and limit is not null
 				result[limit + '-' + axis] = argument
+		else if argument in (border-box content-box padding-box)
+			result['box-sizing'] = argument
 	unless result.height
 		result.height = result.width
 	for key, value in result
