@@ -17,14 +17,7 @@
   box-sizing: border-box;
 }
 ::-moz-focus-inner {
-  border-width: 1px;
   border-style: solid;
-  -webkit-border-radius: ;
-  -moz-border-radius: ;
-  -o-border-radius: ;
-  -ms-border-radius: ;
-  border-radius: ;
-  -khtml-border-radius: ;
 }
 details {
   -webkit-appearance: none;
@@ -163,8 +156,8 @@ sup {
   content: '+';
 }
 @font-face {
-  font-family: 'Ubuntu-Light';
-  src: local('Ubuntu'), url("./fonts/Ubuntu-Light.eot"), url("./fonts/Ubuntu-Light.eot?#iefix") format('embedded-opentype'), url("./fonts/Ubuntu-Light.woff") format('woff'), url("./fonts/Ubuntu-Light.ttf") format('truetype'), url("./fonts/Ubuntu-Light.svg#Ubuntu-Light") format('svg');
+  font-family: 'Ubuntu';
+  src: url("./fonts/Ubuntu-Light.eot"), url("./fonts/Ubuntu-Light.eot?#iefix") format('embedded-opentype'), url("./fonts/Ubuntu-Light.woff") format('woff'), url("./fonts/Ubuntu-Light.ttf") format('truetype'), url("./fonts/Ubuntu-Light.svg#Ubuntu-Light") format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -174,6 +167,14 @@ body {
   color: #404040;
   width: 100%;
   height: 100%;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
 }
 .GitHub {
   display: block;
@@ -198,15 +199,58 @@ body {
   height: 100%;
   z-index: 0;
   position: relative;
+  display: table;
+}
+.Screen > * {
+  display: table-cell;
+  vertical-align: middle;
+}
+.Screen .wrap {
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (min-width: 800px) {
+  .Screen .wrap {
+    width: 600px;
+  }
+}
+@media (min-width: 1000px) {
+  .Screen .wrap {
+    width: 780px;
+  }
+}
+@media (min-width: 1200px) {
+  .Screen .wrap {
+    width: 980px;
+  }
+}
+@media (min-width: 1400px) {
+  .Screen .wrap {
+    width: 1190px;
+  }
+}
+.Screen .wrap a {
+  text-decoration: underline;
+}
+.Screen .wrap h1,
+.Screen .wrap h2,
+.Screen .wrap h3,
+.Screen .wrap h4,
+.Screen .wrap h5,
+.Screen .wrap h6 {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-size: 3em;
+}
+.Screen .wrap p {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  text-align: justify;
 }
 .Screen.header {
   background-color: #fff;
-  display: table;
   font-size: 3em;
-}
-.Screen.header > * {
-  display: table-cell;
-  vertical-align: middle;
 }
 .Screen.header > * {
   width: 100%;
@@ -280,5 +324,4 @@ body {
 }
 .Screen.about {
   background-color: #e6e6e6;
-  color: #404040;
 }

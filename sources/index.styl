@@ -3,12 +3,24 @@ reset()
 
 font-face(file: 'Ubuntu-Light', name: 'Ubuntu', dir: './fonts')
 
-light-gray = darken(white, 10%)
+gray-light = darken(white, 10%)
 black = contrast-color(white)
+
+scale = 0 400px 600px 800px 1000px 1200px 1400px
+widths = auto 400px 600px 780px 980px 1190px 1380px
+
+auto-width(i=-1)
+	width widths[0]
+	for j in 3..6
+		@media (min-width: scale[j])
+			width widths[j+i]
 
 +tags('document')
 	font 'Ubuntu' black
 	size 100%
+
++tags('header')
+	font weight normal
 
 .GitHub
 	display block
@@ -17,16 +29,31 @@ black = contrast-color(white)
 	transform rotate(-45deg)
 	fixed 10 left (-60px) top 80px
 	font center
-	background lighten(light-gray, 50%)
-	color contrast-color(light-gray)
+	background lighten(gray-light, 50%)
+	color contrast-color(gray-light)
 
 .Screen
 	size 100%
 	relative 0
+	crutch-table-middle()
+	
+	.wrap
+		auto-width()
+		margin center
+		
+		a
+			font underline
+		
+		+tags('header')
+			margin top 1em bottom .5em
+			font 3em
+		
+		p
+			margin top 1em bottom .5em
+			text justify
 	
 	&.header
 		background white
-		crutch-table-middle()
 		font-size 3em
 		
 		> *
@@ -46,7 +73,7 @@ black = contrast-color(white)
 						padding 5px h 10px
 						
 						&:first-child:not(:last-child)
-							background light-gray
+							background gray-light
 							color black
 							relative 0
 							padding right 0
@@ -54,7 +81,7 @@ black = contrast-color(white)
 							
 							&:after
 								absolute top 0 right (- 32px)
-								border-triangle right light-gray 16px
+								border-triangle right gray-light 16px
 			
 			> .description
 				font center 0.35em
@@ -65,5 +92,4 @@ black = contrast-color(white)
 				opacity .75
 	
 	&.about
-		background light-gray
-		color black
+		background gray-light
