@@ -19,12 +19,13 @@ osws-options-background--generate(option, args)
 // directions in (top right bottom left)
 // repeats in (repeat no-repeat repeat-x repeat-y space round)
 
-// ^[inherit]
-// [[fixed/scroll]{1}/attachment inherit]
-// [[rgba/transparent]{1}/color inherit]
-// [[call(url())/linear-gradient()]{1}/image inherit]
-// [[directions/unit]{1,2}/position inherit]
-// [[repeats]{1}/repeat inherit]
+// `^[inherit]`
+// `[[fixed/scroll]{1}/attachment inherit]`
+// `[[rgba/transparent]{1}/color inherit]`
+// `[[call(url())/linear-gradient()]{1}/image inherit]`
+// `[[directions/unit]{1,2}/position inherit]`
+// `[[repeats]{1}/repeat inherit]`
+// `[!important]` sets all options with `!important`
 
 background()
 	if arguments[0] is inherit

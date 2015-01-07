@@ -12,11 +12,14 @@
 // `[value]{1}` sets `margin-{direction}`
 // always available
 // `[center]` sets `margin-left auto` `margin-right auto`
+// `[!important]` sets all options with `!important`
 
 margin()
 	margins = ()
 	directions = {}
+	
 	important = ()
+	
 	for argument, a in arguments
 		if argument is a 'unit' or argument is auto
 			if arguments[a - 1] in (top right bottom left)
@@ -37,10 +40,13 @@ margin()
 		else if argument is center
 			directions.left = auto
 			directions.right = auto
+		
 		else if argument is !important
 			important = !important
+		
 	if length(margins) > 0
 		margin: margins important
+	
 	for key, value in directions
 		margin-{key}: value important
 
@@ -55,11 +61,15 @@ margin()
 // `[direction]` define that will relate the following values
 // available only after determine the `direction`:
 // `[value]{1}` sets `padding-{direction}`
+// always available
+// `[!important]` sets all options with `!important`
 
 padding()
 	paddings = ()
 	directions = {}
+	
 	important = ()
+	
 	for argument, a in arguments
 		if argument is a 'unit' or argument is auto
 			if arguments[a - 1] in (top right bottom left)
@@ -77,9 +87,12 @@ padding()
 				directions['' + arguments[a - 1]] = argument
 			else
 				paddings = inherit
+		
 		else if argument is !important
 			important = !important
+		
 	if length(paddings) > 0
 		padding: paddings important
+	
 	for key, value in directions
 		padding-{key}: value important

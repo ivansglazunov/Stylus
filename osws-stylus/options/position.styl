@@ -1,13 +1,16 @@
 // position
 
-// ^[(z-index) unit]{1}
-// [(position) static/absolute/fixed/relative/inherit]{1}
-// [(direction) top/right/bottom/left unit]{1,4}
+// `^[(z-index) unit]{1}`
+// `[(position) static/absolute/fixed/relative/inherit]{1}`
+// `[(direction) top/right/bottom/left unit]{1,4}`
+// `[!important]` sets all options with `!important`
 
 position()
 	result = {}
 	key = null
+	
 	important = ()
+	
 	for argument, a in arguments
 		key = arguments[a - 1] if a > 0
 		if argument is !important
@@ -29,6 +32,7 @@ position()
 					result['position'] = argument
 				else
 					result['z-index'] = argument
+	
 	for key, value in result
 		{key}: value important
 
@@ -36,6 +40,7 @@ position()
 
 // ^[(z-index) unit]{1}
 // [(direction) top/right/bottom/left unit]{1,4}
+// `[!important]` sets all options with `!important`
 
 static()
 	push(arguments, static)
