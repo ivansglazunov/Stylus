@@ -7,9 +7,12 @@
 position()
 	result = {}
 	key = null
+	important = ()
 	for argument, a in arguments
 		key = arguments[a - 1] if a > 0
-		if argument in (static absolute fixed relative)
+		if argument is !important
+			important = !important
+		else if argument in (static absolute fixed relative)
 			result['position'] = argument
 		else if argument in (top right bottom left)
 			result['' + argument] = 0
@@ -27,7 +30,7 @@ position()
 				else
 					result['z-index'] = argument
 	for key, value in result
-		{key}: value;
+		{key}: value important
 
 // static/absolute/fixed/relative
 

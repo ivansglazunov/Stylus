@@ -16,10 +16,17 @@
 margin()
 	margins = ()
 	directions = {}
+	important = ()
 	for argument, a in arguments
 		if argument is a 'unit' or argument is auto
 			if arguments[a - 1] in (top right bottom left)
 				directions['' + arguments[a - 1]] = argument
+			else if arguments[a - 1] in (h hor horizontal)
+				directions.left = argument
+				directions.right = argument
+			else if arguments[a - 1] in (v ver vertical)
+				directions.top = argument
+				directions.bottom = argument
 			else if length(margins) < 5
 				push(margins, argument)
 		else if argument is inherit
@@ -30,10 +37,12 @@ margin()
 		else if argument is center
 			directions.left = auto
 			directions.right = auto
+		else if argument is !important
+			important = !important
 	if length(margins) > 0
-		margin margins
+		margin: margins important
 	for key, value in directions
-		margin-{key}: value;
+		margin-{key}: value important
 
 // padding
 
@@ -50,10 +59,17 @@ margin()
 padding()
 	paddings = ()
 	directions = {}
+	important = ()
 	for argument, a in arguments
 		if argument is a 'unit' or argument is auto
 			if arguments[a - 1] in (top right bottom left)
 				directions['' + arguments[a - 1]] = argument
+			else if arguments[a - 1] in (h hor horizontal)
+				directions.left = argument
+				directions.right = argument
+			else if arguments[a - 1] in (v ver vertical)
+				directions.top = argument
+				directions.bottom = argument
 			else if length(paddings) < 5
 				push(paddings, argument)
 		else if argument is inherit
@@ -61,7 +77,9 @@ padding()
 				directions['' + arguments[a - 1]] = argument
 			else
 				paddings = inherit
+		else if argument is !important
+			important = !important
 	if length(paddings) > 0
-		padding paddings
+		padding: paddings important
 	for key, value in directions
-		padding-{key}: value;
+		padding-{key}: value important

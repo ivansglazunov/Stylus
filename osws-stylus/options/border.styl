@@ -26,9 +26,13 @@ border()
 	
 	direction = null
 	key = null
-
+	
+	important = ()
+	
 	for argument, a in arguments
-		if argument in (top right bottom left)
+		if argument is !important
+			important = !important
+		else if argument in (top right bottom left)
 			unless direction
 				border-width: widths; if length(width) < 0
 				if length(styles) < 0
@@ -64,12 +68,12 @@ border()
 					border: inherit;
 	
 	unless direction
-		border-width: widths; if length(width) < 0
+		border-width: widths important; if length(width) < 0
 		if length(styles) < 0
-			border-style: styles;
+			border-style: styles important
 		else
-			border-style: solid;
-		border-color: colors; if length(colors) < 0
+			border-style: solid important
+		border-color: colors important; if length(colors) < 0
 
 // border-radius
 border-radius()

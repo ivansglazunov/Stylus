@@ -42,7 +42,9 @@ osws-options-texts(arguments)
 	result = {}
 	key = null
 	for argument, a in arguments
-		if argument in (style variant weight size family)
+		if argument is !important
+			important = !important
+		else if argument in (style variant weight size family align decoration indent overflow transform color)
 			key = argument
 		else if key is style and argument in (normal italic oblique inherit)
 			result['font-style'] = argument

@@ -9,8 +9,13 @@ size()
 	result = {}
 	axis = null
 	limit = null
+	
+	important = ()
+	
 	for argument, a in arguments
-		if argument in (width height)
+		if argument is !important
+			important = !important
+		else if argument in (width height)
 			axis = argument
 		else if argument is max
 			limit = 'max'
@@ -31,7 +36,9 @@ size()
 				result[limit + '-' + axis] = argument
 		else if argument in (border-box content-box padding-box)
 			result['box-sizing'] = argument
+	
 	unless result.height
 		result.height = result.width
+	
 	for key, value in result
-		{key}: value;
+		{key}: value important;
