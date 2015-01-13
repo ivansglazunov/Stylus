@@ -3,7 +3,7 @@ osws-grid-indent ?= 0
 osws-grid-indent ?= 0
 osws-grid-parent-first ?= false
 
-grid(ratios = 1, offset = 0, row = 0, outrow = 0, indent = osws-grid-indent)
+grid(ratios = 1, offset = 0, columns = 0, all = 0, indent = osws-grid-indent)
 	side = osws-grid-float
 	opposite-side = opposite-position(side)
 	column-widths = osws-grid-get-column(ratios, indent)
@@ -27,18 +27,18 @@ grid(ratios = 1, offset = 0, row = 0, outrow = 0, indent = osws-grid-indent)
 	margin-{side}: (margin-l)%
 	margin-{opposite-side}: (margin-r)%
 
-	if outrow != 0
-		&:nth-of-type({outrow}n)
+	if all != 0
+		&:nth-of-type({all}n)
 			margin-{opposite-side}: (margin-r)%
 			float: side
-		&:nth-of-type({outrow}n+1)
+		&:nth-of-type({all}n+1)
 			clear: none
 
-	if row != 0
-		&:nth-of-type({row}n)
+	if columns != 0
+		&:nth-of-type({columns}n)
 			margin-{opposite-side}: (margin-last)%
 			float: opposite-side
-		&:nth-of-type({row}n+1)
+		&:nth-of-type({columns}n+1)
 			clear: both
 	 else
 		&:last-child
