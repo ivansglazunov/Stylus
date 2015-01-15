@@ -13,9 +13,9 @@ osws-options--generate(option, args, only = (), ignore = (), vendor = true)
 			else
 				newprop = option
 				newprop = '-' + prefix + '-' + option if vendor
-
+	
 				if needNormalize
-					{newprop}: osws-options-generate--normalize(option,('%s' % args),prefix)
+					{newprop}: osws-options-generate--normalize(option,('%s' % args), prefix)
 				else
 					{newprop}: args
 
