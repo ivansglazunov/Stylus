@@ -20,29 +20,40 @@ margin()
 	
 	important = ()
 	
+	axis = false
+	
 	for argument, a in arguments
-		if argument is a 'unit' or argument is auto
-			if arguments[a - 1] in (top right bottom left)
-				directions['' + arguments[a - 1]] = argument
-			else if arguments[a - 1] in (h hor horizontal)
-				directions.left = argument
-				directions.right = argument
-			else if arguments[a - 1] in (v ver vertical)
-				directions.top = argument
-				directions.bottom = argument
-			else if length(margins) < 5
-				push(margins, argument)
-		else if argument is inherit
-			if arguments[a - 1] in (top right bottom left)
-				directions['' + arguments[a - 1]] = argument
-			else
-				margins = inherit
-		else if argument is center
-			directions.left = auto
-			directions.right = auto
-		
-		else if argument is !important
-			important = !important
+		if axis
+			axis = false
+		else
+			if argument is a 'unit' or argument is auto
+				if arguments[a - 1] in (top right bottom left)
+					directions['' + arguments[a - 1]] = argument
+				else if arguments[a - 1] in (h hor horizontal)
+					directions.left = argument
+					directions.right = argument
+					axis = true
+					if type(arguments[a + 1]) is 'unit'
+						directions.right = arguments[a + 1]
+				else if arguments[a - 1] in (v ver vertical)
+					directions.top = argument
+					directions.bottom = argument
+					axis = true
+					if type(arguments[a + 1]) is 'unit'
+						directions.bottom = arguments[a + 1]
+				else if length(margins) < 5
+					push(margins, argument)
+			else if argument is inherit
+				if arguments[a - 1] in (top right bottom left)
+					directions['' + arguments[a - 1]] = argument
+				else
+					margins = inherit
+			else if argument is center
+				directions.left = auto
+				directions.right = auto
+			
+			else if argument is !important
+				important = !important
 		
 	if length(margins) > 0
 		margin: margins important
@@ -70,26 +81,37 @@ padding()
 	
 	important = ()
 	
+	axis = false
+	
 	for argument, a in arguments
-		if argument is a 'unit' or argument is auto
-			if arguments[a - 1] in (top right bottom left)
-				directions['' + arguments[a - 1]] = argument
-			else if arguments[a - 1] in (h hor horizontal)
-				directions.left = argument
-				directions.right = argument
-			else if arguments[a - 1] in (v ver vertical)
-				directions.top = argument
-				directions.bottom = argument
-			else if length(paddings) < 5
-				push(paddings, argument)
-		else if argument is inherit
-			if arguments[a - 1] in (top right bottom left)
-				directions['' + arguments[a - 1]] = argument
-			else
-				paddings = inherit
-		
-		else if argument is !important
-			important = !important
+		if axis
+			axis = false
+		else
+			if argument is a 'unit' or argument is auto
+				if arguments[a - 1] in (top right bottom left)
+					directions['' + arguments[a - 1]] = argument
+				else if arguments[a - 1] in (h hor horizontal)
+					directions.left = argument
+					directions.right = argument
+					axis = true
+					if type(arguments[a + 1]) is 'unit'
+						directions.bottom = arguments[a + 1]
+				else if arguments[a - 1] in (v ver vertical)
+					directions.top = argument
+					directions.bottom = argument
+					axis = true
+					if type(arguments[a + 1]) is 'unit'
+						directions.bottom = arguments[a + 1]
+				else if length(paddings) < 5
+					push(paddings, argument)
+			else if argument is inherit
+				if arguments[a - 1] in (top right bottom left)
+					directions['' + arguments[a - 1]] = argument
+				else
+					paddings = inherit
+			
+			else if argument is !important
+				important = !important
 		
 	if length(paddings) > 0
 		padding: paddings important
