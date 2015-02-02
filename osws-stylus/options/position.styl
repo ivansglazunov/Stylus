@@ -18,7 +18,7 @@ position()
 		else if argument in (static absolute fixed relative)
 			result['position'] = argument
 		else if argument in (top right bottom left)
-			result['' + argument] = 0
+			result['' + osws-rewrap(argument)] = 0
 		else if argument is a 'unit' or argument is inherit
 			if key in (top right bottom left position z-index)
 				if key is position
@@ -26,7 +26,7 @@ position()
 				else if key is z-index
 					result['z-index'] = argument
 				else
-					result[''+key] = argument
+					result['' + osws-rewrap(key)] = argument
 			else
 				if argument is inherit
 					result['position'] = argument
@@ -53,22 +53,4 @@ fixed()
 	position arguments
 relative()
 	push(arguments, relative)
-	position arguments
-
-// top/right/bottom/left
-// [unit]
-// [(direction) top/right/bottom/left unit]{1,3}
-// `[!important]` sets all options with `!important`
-
-top()
-	unshift(arguments, top)
-	position arguments
-right()
-	unshift(arguments, right)
-	position arguments
-bottom()
-	unshift(arguments, bottom)
-	position arguments
-left()
-	unshift(arguments, left)
 	position arguments

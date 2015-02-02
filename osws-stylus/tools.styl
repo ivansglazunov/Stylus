@@ -1,7 +1,27 @@
 reverse-list(list)
 	result = ()
-	
 	for item in list
 		prepend(result, item)
-
 	return result
+
+osws-rewrap(mix)
+	if mix is top
+		return unquote('top')
+	else if mix is right
+		return unquote('right')
+	else if mix is bottom
+		return unquote('bottom')
+	else if mix is left
+		return unquote('left')
+	else if mix is static
+		return unquote('static')
+	else if mix is absolute
+		return unquote('absolute')
+	else if mix is fixed
+		return unquote('fixed')
+	else if mix is relative
+		return unquote('relative')
+	else if mix is z-index
+		return unquote('z-index')
+	else
+		error('unexpected')

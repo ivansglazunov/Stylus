@@ -1,23 +1,30 @@
 {
-	"name": "osws-stylus",
-	"version": "0.0.2",
-	"description": "Open Source Web Standards for Stylus",
-	"keywords": [],
-	"author": "Open Source Web Standards",
-	"homepage": "http://osws.github.io/OSWS-Stylus",
-	"bugs" : {
-		"url" : "https://github.com/OSWS/OSWS-Stylus/issues",
-		"email" : "opensourcewebstandards@gmail.com"
-	},
-	"license": "MIT",
-	"author": "Open Source Web Standards <opensourcewebstandards@gmail.com> (http://osws.github.io/OSWS)",
-	"main": "osws-stylus.js",
-	"repository" : {
-		"type" : "git",
-		"url" : "https://github.com/OSWS/OSWS-Stylus"
-	},
-	"dependencies": {
-		"lodash": "^2.4.1",
-	    "string": "^3.0.0"
-	}
+  "name": "osws-stylus",
+  "version": "0.0.3",
+  "description": "Open Source Web Standards for Stylus",
+  "keywords": [],
+  "author": "Open Source Web Standards <opensourcewebstandards@gmail.com> (http://osws.github.io/OSWS)",
+  "homepage": "http://osws.github.io/OSWS-Stylus",
+  "bugs": {
+    "url": "https://github.com/OSWS/OSWS-Stylus/issues",
+    "email": "opensourcewebstandards@gmail.com"
+  },
+  "license": "MIT",
+  "main": "osws-stylus.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OSWS/OSWS-Stylus"
+  },
+  "dependencies": {
+    "lodash": "^2.4.1",
+    "string": "^3.0.0",
+    "coffee-script": "^1.9.0",
+    "chai": "^1.10.0",
+    "stylus": "^0.49.3",
+    "mocha": "^2.1.0",
+    "clean-css": "^3.0.8"
+  },
+  "scripts": {
+    "test": "mocha test.coffee --compilers coffee:coffee-script/register"
+  }
 }
